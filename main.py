@@ -81,7 +81,7 @@ def auth():
 
     return jsonify(token=_get_jwt(user_data).decode('utf-8'))
 
-#test6
+#test6for rebuild
 @APP.route('/contents', methods=['GET'])
 def decode_jwt():
     """
