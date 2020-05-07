@@ -1,5 +1,9 @@
 # Deploying a Flask API
 
+## Pod Address
+
+- ae080f7ed8de54b6282e4d9cadf4333c-1359224127.us-west-2.elb.amazonaws.com
+
 This is the project starter repo for the fourth course in the [Udacity Full Stack Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004): Server Deployment, Containerization, and Testing.
 
 In this project you will containerize and deploy a Flask API to a Kubernetes cluster using Docker, AWS EKS, CodePipeline, and CodeBuild.
@@ -7,8 +11,26 @@ In this project you will containerize and deploy a Flask API to a Kubernetes clu
 The Flask app that will be used for this project consists of a simple API with three endpoints:
 
 - `GET '/'`: This is a simple health check, which returns the response 'Healthy'. 
+
 - `POST '/auth'`: This takes a email and password as json arguments and returns a JWT based on a custom secret.
+    - Request Arguments: email, password
+    - Returns: encoded JWT
+    {
+        "token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTAwNzg5NjcsIm5iZiI6MTU4ODg2OTM2NywiZW1haWwiOiI8RU1BSUw-In0.Iz-jOAhcf-jRf4Hal3Foi2Cs5Y2GIikRwJjZLSOVSO4"
+    }
+
 - `GET '/contents'`: This requires a valid JWT, and returns the un-encrpyted contents of that token. 
+    - Header: Bearer Token
+    - Request Arguments: None
+    - Returns: decoded contents of a JWT 
+    {
+        "email":"<EMAIL>",
+        "exp":1590078967,
+        "nbf":1588869367
+    }
+
+you can use curl or postman in order to check these endpoints 
+
 
 The app relies on a secret set as the environment variable `JWT_SECRET` to produce a JWT. The built-in Flask server is adequate for local development, but not production, so you will be using the production-ready [Gunicorn](https://gunicorn.org/) server when deploying the app.
 
