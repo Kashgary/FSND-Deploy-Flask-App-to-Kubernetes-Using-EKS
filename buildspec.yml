@@ -29,6 +29,7 @@ phases:
         - export KUBECONFIG=$HOME/.kube/config
   build:
     commands:
+      - service docker start
       - docker build --tag $REPOSITORY_URI:$TAG .
 
   post_build:
