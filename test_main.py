@@ -1,7 +1,7 @@
 '''
 Tests for jwt flask app.
 '''
-import os
+import os, sys
 import json
 import pytest
 
